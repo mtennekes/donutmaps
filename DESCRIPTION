@@ -11,12 +11,15 @@ Version: 0.1
 Date: 2021-04-02
 Encoding: UTF-8
 Depends:
-    R (>= 3.5.0),
-    methods
+    R (>= 3.5.0)
 Imports:
 	tmap (>= 3.3-1),
-	odf (>= 0.1)
+	tidyr,
+	dplyr,
+	odf (>= 0.1),
+	units,
+	ggplot2,
+	sf
 URL: https://github.com/mtennekes/donutmaps
 BugReports: https://github.com/mtennekes/donutmaps/issues
-VignetteBuilder: knitr
 RoxygenNote: 7.1.1

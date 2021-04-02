@@ -49,7 +49,12 @@ round_num = function(x, round_to) round2(x / round_to) * round_to
 #' @param basemaps \code{Basemaps} See \code{\link[tmap:tm_basemap]{tm_basemap}}.
 #' @import odf
 #' @import tmap
-#' @import tidyr
+#' @importFrom sf st_set_crs
+#' @importFrom dplyr group_by slice ungroup transmute as_tibble select n filter sym group_by_at "%>%" rename summarize left_join mutate vars tibble case_when everything arrange desc
+#' @importFrom tidyr replace_na pivot_wider complete pivot_longer
+#' @importFrom units set_units
+#' @import ggplot2
+#' @export
 #' @example examples/bake_donuts.R
 bake_donuts = function(x,
                        var,
@@ -102,6 +107,9 @@ bake_donuts = function(x,
   title = NULL,
   basemaps = c("Esri.WorldGrayCanvas", "OpenStreetMap")
 ) {
+
+  name <- name_from <- name_to <- label <- code <- flow_res <- residents_ <- class_to <- class_from <- width <- code_from <- code_to <- flow <- show <- value <- NULL  
+
   
   stopifnot(odf::od_is_valid(x))
   
@@ -239,9 +247,9 @@ bake_donuts = function(x,
   
   
   # calculate text$inflow and text$outflow
-  x <- odf:::od_sum_out(x, "flow")
-  x <- odf:::od_sum_in(x, "flow")
-  x <- odf:::od_sum_stay(x, "flow")
+  x <- odf::od_sum_out(x, "flow")
+  x <- odf::od_sum_in(x, "flow")
+  x <- odf::od_sum_stay(x, "flow")
   
   x$U$flow_res = round_num(x$U$flow_stay + x$U$flow_out, round_to)
   

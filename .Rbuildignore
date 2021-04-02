@@ -1,2 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+examples
+LICENSE
+README
+.Rprofile
